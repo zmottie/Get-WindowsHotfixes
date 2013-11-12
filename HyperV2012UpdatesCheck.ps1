@@ -1,7 +1,10 @@
 ﻿# Remake of Christian Edwards script to make it more flexible
 # http://blogs.technet.com/b/cedward/archive/2013/05/31/validating-hyper-v-2012-and-failover-clustering-hotfixes-with-powershell-part-2.aspx
 #
-# Niklas Akerlund 2013-06-28
+# Version history
+# 1.0.0 Niklas Akerlund 2013-06-28 - initial release
+# 1.0.1 Wojciech Sciesinski 2013-11-12 - add support for PowerShell 2.0 
+#
 
 param
 (
@@ -37,7 +40,7 @@ if ($ClusterName){
 }
 foreach($Node in $Nodes)
 {
-$Hotfixes = Get-HotFix -ComputerName $Node |select HotfixID,description
+$Hotfixes = Get-WmiObject -Class Win32_QuickFixEngineering | select description,hotfixid,installedon 
 
 foreach($RecomendedHotfix in $HyperVHotfixes)
 {
