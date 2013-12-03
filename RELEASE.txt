@@ -1,0 +1,12 @@
+
+
+Version history
+1.0.0 2013-06-28 - initial release based on Niklas Akerlund script 
+on his webpage http://vniklas.djungeln.se/2013/06/28/hotfix-and-updates-check-of-hyper-v-and-cluster-with-powershell/
+
+1.1.0 2013-12-x 
+
+Author: Wojciech Sciesinski 
+- script converted to function and renamed from HyperV2012UpdatesCheck.ps1 to Get-WindowsHotfixes.ps1
+- added support for PowerShell 2.0 
+- added support for download using Internet Explorer proxy settings for current user
