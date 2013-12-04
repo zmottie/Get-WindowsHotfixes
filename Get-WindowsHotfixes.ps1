@@ -52,11 +52,21 @@ param
     [string]$DownloadPath,
 	
 	[parameter]
-	[swith]$UseIEProxy
+	[switch]$UseIEProxy,
 	
 	[parameter]
-	[swithc]$UncompressDownloaded
-
+	[swtich]$DownloadHotfixesOnly,
+	
+	[parameter]
+	[switch]$UncompressDownloaded,
+	
+	[parameter]
+	[switch]$DownloadHotfixesDefinitions,
+	
+	[parameter]
+	[string]$HotfixesDefinitionsDownloadsPath
+	
+	
 )
 
 #Current user proxy settings are used
@@ -66,6 +76,13 @@ if ($UseIEProxy) {
 	
 	$ProxySettings.Credentials = [System.Net.CredentialCache]::DefaultCredentials
 	
+}
+
+# Downloading definitions from the website
+if ($DownloadHotfixesDefinitions) {
+
+	[io.file]::WriteAllBytes($tempfilename,(Invoke-WebRequest -URI $HotfixesDefinitionsDownloadsPath"\").content)
+
 }
 
 #Getting current execution path
