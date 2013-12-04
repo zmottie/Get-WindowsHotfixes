@@ -1,0 +1,26 @@
+$HotfixesDefinitionsDownloadsPath="https://github.com/it-praktyk/Get-WindowsHotfixes/archive/master.zip"
+$source = $HotfixesDefinitionsDownloadsPath
+$tempfilename = [System.IO.Path]::GetTempFileName()
+$dest = $tempfilename
+$WebClient = New-Object System.Net.WebClient
+$ProxyUrl="http://proxy-emea.my-it-solutions.net:84"
+$WebProxy.Credentials = $Credentials
+$WebClient.Proxy = $WebProxy
+$WebClient.DownloadFile($source,$dest)
+
+# source:http://mohundro.com/blog/2007/06/28/a-simple-function-to-get-a-webclient-with-proxy-in-powershell/
+function Get-ProxyWebClient {
+  $webclient = New-Object System.Net.WebClient
+  $proxy = New-Object System.Net.WebProxy($global:ProxyUrl, $global:ProxyPort)
+  $proxy.Credentials = (Get-Credential).GetNetworkCredential()
+  $webclient.Proxy = $proxy
+  return $webclient
+}
+
+function Get-ProxyWebClient {
+  $webclient = New-Object System.Net.WebClient
+  $proxy = New-Object System.Net.WebProxy("http://proxy-emea.my-it-solutions.net", 84)
+  $proxy.Credentials = (Get-Credential).GetNetworkCredential()
+  $webclient.Proxy = $proxy
+  return $webclient
+}
