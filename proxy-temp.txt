@@ -1,9 +1,9 @@
-$HotfixesDefinitionsDownloadsPath="https://github.com/it-praktyk/Get-WindowsHotfixes/archive/master.zip"
+[String]$HotfixesDefinitionsDownloadsPath="https://github.com/it-praktyk/Get-WindowsHotfixes/archive/master.zip"
 $source = $HotfixesDefinitionsDownloadsPath
 $tempfilename = [System.IO.Path]::GetTempFileName()
 $dest = $tempfilename
 $WebClient = New-Object System.Net.WebClient
-$ProxyUrl="http://proxy-emea.my-it-solutions.net:84"
+[String]$ProxyUrl="http://proxy-emea.my-it-solutions.net:84"
 $WebProxy.Credentials = $Credentials
 $WebClient.Proxy = $WebProxy
 $WebClient.DownloadFile($source,$dest)
@@ -18,11 +18,34 @@ function Get-ProxyWebClient {
 }
 
 function Get-ProxyWebClient {
+
+[CmdletBinding()]
+param
+(
+	[parameter]
+	[string]$ProxyUrl,
+	
+	[parameter]
+	[string]
+)
   $webclient = New-Object System.Net.WebClient
-  $proxy = New-Object System.Net.WebProxy("http://proxy-emea.my-it-solutions.net", 84)
+  $proxy = New-Object System.Net.WebProxy($ProxyUrl)
   $proxy.Credentials = (Get-Credential).GetNetworkCredential()
   $webclient.Proxy = $proxy
   return $webclient
 }
 
 http://msdn.microsoft.com/en-us/library/system.net.webproxy%28v=vs.110%29.aspx
+
+
+  [String]$HotfixesDefinitionsDownloadsPath="https://github.com/it-praktyk/Get-WindowsHotfixes/archive/master.zip"
+  $source = $HotfixesDefinitionsDownloadsPath
+  $tempfilename = [System.IO.Path]::GetTempFileName()
+  $dest = $tempfilename
+  $webclient = New-Object System.Net.WebClient
+  $proxy = New-Object System.Net.WebProxy("http://proxy-emea.my-it-solutions.net:84")
+  $proxy.Credentials = (Get-Credential).GetNetworkCredential()
+  $webclient.Proxy = $proxy
+  $webclient.Downloadfile($source,$dest)
+  
+  http://poshcode.org/3532

@@ -50,13 +50,8 @@ param
     [switch]$Download,
 	
 	[parameter]
-	[switch]$UseIEProxy,
-	
-	[parameter]
 	[string]$ProxyUrl,
-	
-	[
-	
+		
 	[parameter]
     [string]$DownloadPath,
 	
