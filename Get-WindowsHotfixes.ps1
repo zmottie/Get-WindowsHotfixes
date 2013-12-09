@@ -270,3 +270,83 @@ Author:Wojciech Sciesinski, wojciech@sciesinski.net
     }
 
 }
+
+function Invoke-DownloadViaProxy {
+
+<#
+.SYNOPSIS
+Function intended for downloading file using BITS Transfer via proxy 
+.DESCRIPTION
+
+.PARAM FileSource
+File path to download
+
+.PARAM ProxyURL
+Proxy url and port
+
+.PARAM ProxyCredentials
+Proxy credentials 
+
+.PARAM FileDestination
+Path where the download file must be stored
+
+.EXAMPLE
+Invoke-DownloadViaProxy -FileSource "http:\\www.website.com\folder\file.zip" -ProxyURL "http://proxy.example.com:3268" '
+-FileDestination "C:\Folder\file.zip"
+
+.NOTES
+Author:Wojciech Sciesinski, wojciech@sciesinski.net
+#>
+
+	[CmdletBinding()]
+
+    Param(
+    [parameter(Mandatory = $true)]
+    [string]FileSource,
+
+	[parameter]
+	[string]FileDestination,
+    
+    [parameter]
+    [string]ProxyURL,
+	
+	[parameter]
+	[string]ProxyCredentials,
+	
+	[parameter]
+	[switch]Wait=$false
+	
+    )
+
+BEGIN (
+
+	if ($ProxyCredentials.GetType().Name -ne 'PSCredential') {
+	
+		$cred = Get-Credential -Message "Input credentials for proxy server" -Credential $ProxyCredentials -ErrorAction Stop
+	
+	}
+	else {
+	
+		$cred = $ProxyCrentials
+	
+	
+	
+)
+
+PROCESS (	
+	
+	$BitsTransferName=Get-Random
+	
+	Check-LoadedModule -ModuleName BitsTransfer
+	
+	Start-BitsTransfer -FileSource $HotfixesDefinitionsDownloadsPath -ProxyCredential  '
+	-Destination C:\users\a565615.WW930\AppData\Local\Temp\ -ProxyAuthentication Negotiate -Asynchronous '
+	-DisplayName $BitsTransferName
+	
+	#while ($i -le 5)
+
+)
+	
+}
+
+

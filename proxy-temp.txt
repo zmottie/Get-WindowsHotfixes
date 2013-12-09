@@ -1,6 +1,6 @@
 [String]$HotfixesDefinitionsDownloadsPath="https://github.com/it-praktyk/Get-WindowsHotfixes/archive/master.zip"
 $source = $HotfixesDefinitionsDownloadsPath
-$tempfilename = [System.IO.Path]::GetTempFileName()
+$tempfilename = [System.IO.Path]::GetTempFileName() -replace '.tmp','.zip'
 $dest = $tempfilename
 $WebClient = New-Object System.Net.WebClient
 [String]$ProxyUrl="http://proxy-emea.my-it-solutions.net:84"
@@ -40,12 +40,14 @@ http://msdn.microsoft.com/en-us/library/system.net.webproxy%28v=vs.110%29.aspx
 
   [String]$HotfixesDefinitionsDownloadsPath="https://github.com/it-praktyk/Get-WindowsHotfixes/archive/master.zip"
   $source = $HotfixesDefinitionsDownloadsPath
-  $tempfilename = [System.IO.Path]::GetTempFileName()
+  $tempfilename = [System.IO.Path]::GetTempFileName() # -replace '.tmp','.zip'
   $dest = $tempfilename
   $webclient = New-Object System.Net.WebClient
-  $proxy = New-Object System.Net.WebProxy("http://proxy-emea.my-it-solutions.net:84")
+  [String]$proxyURL = "http://proxy-emea.my-it-solutions.net:84"
+  $proxy = New-Object System.Net.WebProxy($proxyURL)
   $proxy.Credentials = (Get-Credential).GetNetworkCredential()
   $webclient.Proxy = $proxy
   $webclient.Downloadfile($source,$dest)
+  
   
   http://poshcode.org/3532
