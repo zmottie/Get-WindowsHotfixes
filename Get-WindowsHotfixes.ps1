@@ -10,15 +10,23 @@ list of hotfixes are taken from files UpdatesListCluster.xml and UpdatesListHype
 One or more computer names to operate against. Accepts pipeline input ByValue and ByPropertyName.
 .PARAM ClusterName
 
-.PARAM Download
+.PARAM DownloadHotfixes
 
 .PARAM DownloadPath
 Folder on the disk where downloaded hotfixes must be stored.
 
 .PARAM UseIEProxy
 
+.PARAM UncompressDownloaded
 
 .PARAM UncompressDownloaded
+	
+.PARAM UncompressionPath
+	
+.PARAM DownloadHotfixesDefinitions
+	
+.PARAM HotfixesDefinitionsDownloadsPath
+
 
 .EXAMPLE
 Get-WindowsHotfixes -Hostname COMPUTERNAME
@@ -47,7 +55,7 @@ param
     $ClusterName,
 	
 	[parameter]
-    [switch]$Download,
+    [switch]$DownloadHotfixes,
 	
 	[parameter]
 	[string]$ProxyUrl,
@@ -85,8 +93,8 @@ BEGIN {
 	# Downloading definitions from the website
 	if ($DownloadHotfixesDefinitions) {
 		
-		$tempfilename = [System.IO.Path]::GetTempFileName()
-		[io.file]::WriteAllBytes($tempfilename,(Invoke-WebRequest -URI $HotfixesDefinitionsDownloadsPath -Proxy $ProxySettings -ProxyUseDefaultCredentials $true ).content)
+		#$tempfilename = [System.IO.Path]::GetTempFileName() -replace '.tmp','.zip'
+		#[io.file]::WriteAllBytes($tempfilename,(Invoke-WebRequest -URI $HotfixesDefinitionsDownloadsPath -Proxy $ProxySettings -ProxyUseDefaultCredentials $true ).content)
 
 	}
 	
@@ -111,6 +119,9 @@ PROCESS {
 
 	#Getting installed Hotfixes from all nodes of the Cluster
 	if ($ClusterName){
+	
+		Check-LoadedModule -ModuleName FailoverClusters
+	
 		$Nodes = Get-Cluster $ClusterName | Get-ClusterNode | Select -ExpandProperty Name
 	}else
 	{
@@ -144,12 +155,12 @@ PROCESS {
 			{
             
 				$obj = [PSCustomObject]@{
-						HyperVNode = $Node
-						HotfixType = "Hyper-V"
-						RecomendedHotfix = $RecomendedHotfix.Id
-						Status = "Not Installed"
-						Description = $RecomendedHotfix.Description
-						DownloadURL =  $RecomendedHotfix.DownloadURL
+					HyperVNode = $Node
+					HotfixType = "Hyper-V"
+					RecomendedHotfix = $RecomendedHotfix.Id
+					Status = "Not Installed"
+					Description = $RecomendedHotfix.Description
+					DownloadURL =  $RecomendedHotfix.DownloadURL
 				} 
                    
 				$listofHotfixes += $obj
@@ -197,7 +208,7 @@ PROCESS {
 	}
 	
 	# Download all hotfixes from definitions file
-	if ($Download){
+	if ($DownloadHotfixes){
 	
 		CheckLoadedModule -ModuleName BitsTransfer
 	
@@ -241,7 +252,7 @@ Check that module BitsTransfer is imported if not module is loaded
 Check-LoadedModule -ModuleName CustomModule -ModulefilePath C:\CustomModules\CustomModule.ps1
 Check that module CustomModule is imported if not module is imported based on give file name in the path
 .NOTES
-Author:Wojciech Sciesinski
+Author:Wojciech Sciesinski, wojciech@sciesinski.net
 #>
 
 	[CmdletBinding()]
@@ -254,8 +265,7 @@ Author:Wojciech Sciesinski
     [string]$ModuleFilePath
     )
 
-    if ( (Get-Module -name $ModuleName -ErrorAction SilentlyContinue) -eq $null )
-    {
+    if ( (Get-Module -name $ModuleName -ErrorAction SilentlyContinue) -eq $null ) {
         Import-Module -Name $ModuleName -ErrorAction Stop
     }
 
