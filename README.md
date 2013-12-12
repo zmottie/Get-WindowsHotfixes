@@ -17,12 +17,19 @@ Sources for updates and hotfixes
 
 Update List for Windows Server 2012 for Hyper-V are published here
 http://social.technet.microsoft.com/wiki/contents/articles/15576.hyper-v-update-list-for-windows-server-2012.aspx
+
 Recommended hotfixes and updates for Windows Server 2012-based Failover Clusters are published here
 http://support.microsoft.com/kb/2784261
 
-Script use xml files that are stored in folder with script. Initial release of this script is based on download at 2013-11-08 from Niklas Akerlund site.
+Script use xml files UpdatesListCluster.xml and UpdatesListHyperV.xml that are stored in folder with script. 
+Initial release of this script and xml files is based on download at 2013-11-08 from Niklas Akerlund site.
 
-Files with hotfixes was updated at November 11, 2013 by Wojciech Sciesinski.
+Updates to UpdatesListCluster.xml
+2013.12.12 - added KB2894032,KB2903938,KB2908415,KB2779069,KB2905249 - by Wojciech Sciesinski based directly on KB Microsoft base
+
+Updates to UpdatesListHyperV.xml
+2013.12.12 - added KB2894032,KB2902014,KB2894485 - by Wojciech Sciesinski based directly on KB Microsoft base
+
 
 IDEAS 
 - checking github website for updated xlm files and downloading it locally
@@ -30,3 +37,5 @@ IDEAS
 - add decompress option for downloaded hotfixes
 - output report to file / with diferent format support
 - add support for another systems and roles e.g. file services
+
+Some ideas implementent in Unstable branch
