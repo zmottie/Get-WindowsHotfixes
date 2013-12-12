@@ -25,10 +25,12 @@ Script use xml files UpdatesListCluster.xml and UpdatesListHyperV.xml that are s
 Initial release of this script and xml files is based on download at 2013-11-08 from Niklas Akerlund site.
 
 Updates to UpdatesListCluster.xml
-2013.12.12 - added KB2894032,KB2903938,KB2908415,KB2779069,KB2905249 - by Wojciech Sciesinski based directly on KB Microsoft base
+2013-11-17 - added KB2894464 - by Wojciech Sciesinski
+2013-12-12 - added KB2894032,KB2903938,KB2908415,KB2779069,KB2905249 - by Wojciech Sciesinski based directly on KB Microsoft base
 
 Updates to UpdatesListHyperV.xml
-2013.12.12 - added KB2894032,KB2902014,KB2894485 - by Wojciech Sciesinski based directly on KB Microsoft base
+2013-11-17 - added KB2894032 - by Wojciech Sciesinski
+2013-12-12 - added KB2894032,KB2902014,KB2894485 - by Wojciech Sciesinski based directly on KB Microsoft base
 
 
 IDEAS 
