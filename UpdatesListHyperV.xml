@@ -4,8 +4,36 @@
 
 	<Description>Updates List Hyper-V and Cluster</Description>
 
-	<LastUpdated>2014-03-24</LastUpdated>
+	<LastUpdated>2014-06-05</LastUpdated>
 
+	<Update Id="KB2878635">
+
+        <Description>2014-03-28 Update is available that improves the resiliency of the cloud service provider in Windows Server 2012: December 2013</Description>
+
+        <DownloadURL>http://hotfixv4.microsoft.com/Windows%208%20RTM/nosp/Fix474423/9200/free/466682_intl_x64_zip.exe</DownloadURL>
+
+		<Notes></Notes>
+
+	</Update>
+	<Update Id="KB2928439">
+
+        <Description>2014-04-09 The virtual machine network fails if the "minimum bandwidth weight" setting is enabled in Windows Server 2012</Description>
+
+        <DownloadURL>http://hotfixv4.microsoft.com/Windows%208/Windows%20Server%202012%20RTM/nosp/Fix490919/9200/free/473557_intl_x64_zip.exe</DownloadURL>
+
+		<Notes></Notes>
+
+	</Update>
+	<Update Id="KB2937634">
+
+        <Description>2014-04-14 The Hyper-V host may be unable to reconnect to the Cluster Scale-Out File Server share after an unplanned failover in Windows 8 or Windows Server 2012</Description>
+
+        <DownloadURL>http://hotfixv4.microsoft.com/Windows%208/Windows%20Server%202012%20RTM/nosp/Fix465224/9200/free/473514_intl_x64_zip.exe</DownloadURL>
+
+		<Notes></Notes>
+
+	</Update>
+	
 	<Update Id="KB2756872">
 
         <Description>2012-02-10 Windows 8 Client and Windows Server 2012 General Availability Update Rollup</Description>
